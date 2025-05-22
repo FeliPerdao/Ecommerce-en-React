@@ -1,0 +1,110 @@
+.card{
+    height: 100%,
+    min-height: 350px;
+    width: 100%;
+    max-width: 180px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+    justify-content: space-between;
+}
+
+.imageContainer{
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 180px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover .imagen {
+    object-fit: contain;
+    transform: scale(0.9);
+}
+
+.imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease, object-fit 1s ease;
+}
+
+.nombre{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333333;
+    text-align: center;   
+}
+
+.descripcion {
+    font-size: 14px;
+    color: #555;
+    font-style: italic;
+    text-align: center;
+    margin: 8px 0 12px;
+    line-height: 1.4;
+    padding: 0 10px;
+    opacity: 0.9;
+    transition: color 0.3s ease;
+}
+
+.card:hover .descripcion {
+    color: #2563eb; /* azul suave al hacer hover */
+}
+
+.card:hover .nombre {
+    color: red;
+}
+
+.precio{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #2563eb;
+}
+
+.stock{
+    font-size: 13px;
+    color: #666666;
+    margin-bottom: 12px;
+}
+
+.cantidadContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+
+.qtyButton{
+    background-color: #e0e0e0;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.contenedorGrilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px; /* ancho máximo para que no se estire de más */
+    margin: 0 auto;     /* centrado horizontal */
+    align-items: stretch; /* estira los elementos para que tengan la misma altura */
+}

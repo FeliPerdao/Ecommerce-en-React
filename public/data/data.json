@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Aire enlatado del Himalaya",
+    "price": 99,
+    "stock": 12,
+    "description": "Respirá la pureza ancestral sin moverte del sillón. Extraído directamente de una cueva con monjes que no hablan desde 1732.",
+    "img": "/images/1.jpg",
+    "category": "promo",
+    "detail": "¿Cansado del smog urbano, de los colectivos escupiendo humo y del aire acondicionado que huele a oficina vieja? Presentamos el 'Aire enlatado del Himalaya'. No es solo aire: es una experiencia espiritual comprimida. Cada lata contiene 473 ml de oxígeno recogido por sherpas certificados que escalan con un solo pulmón, mientras un monje entona mantras de purificación. Ideal para yoguis frustrados, gente con alergia a la ciudad o influencers en búsqueda de contenido exótico. Abrí la lata y dejate llevar por una bocanada de pureza ancestral, directamente desde una cueva donde el tiempo se detuvo… y el WiFi nunca llegó. Inhalá profundamente y sentí cómo tu alma se eleva (aunque el cuerpo siga en jogging frente a la compu). Bonus: podés usar la lata vacía como decoración minimalista o para guardar tus frustraciones respiradas. Porque respirar aire común ya no es una opción."
+  },
+  {
+    "id": 2,
+    "name": "Piedra emocional de compañía",
+    "price": 45,
+    "stock": 25,
+    "description": "Nunca te juzga. Nunca te deja en visto. Ideal para hablarle después de tu tercera cerveza.",
+    "img": "/images/2.jpg",
+    "category": "oferta",
+    "detail": "En un mundo donde hasta las plantas te ghostean si no las regás, llega la 'Piedra emocional de compañía'. No habla, no se mueve, y no tiene redes sociales. Perfecta. Su textura fría y su peso emocional te invitan a largas charlas introspectivas donde, curiosamente, siempre tenés razón. Ideal para solteros, sobrevivientes de cenas familiares o víctimas del doble tilde azul. Podés abrazarla, ignorarla o incluso perderla: siempre va a volver (porque no camina, claro). Cada piedra fue seleccionada por su falta de personalidad única, su carisma pétreo y su capacidad para sostener conversaciones sin interrupciones. ¿Una pareja tóxica? Jamás. ¿Un amigo que te escucha sin opinar? Sí, y además no comparte memes viejos. ¿Terapia cara? No gracias. La piedra está. Siempre estuvo. Siempre estará. Porque a veces lo único que necesitamos es alguien… o algo… que no emita juicios mientras lloramos viendo comerciales de seguros."
+  },
+  {
+    "id": 3,
+    "name": "WiFi portátil embotellado",
+    "price": 120,
+    "stock": 5,
+    "description": "Una botella llena de promesas. No conecta a nada, pero hace que parezcas importante en cualquier reunión.",
+    "img": "/images/3.jpg",
+    "category": "oferta",
+    "detail": "¿Estás harto de fingir que trabajás en cafés sin WiFi? ¿Querés parecer ocupado mientras huís de tus responsabilidades? El 'WiFi portátil embotellado' es tu salvación estética. No transmite datos, no tiene contraseña, pero ¡vaya si transmite actitud! Su elegante diseño transparente con etiquetas técnicas confusas hará que cualquiera crea que sos un hacker nómada o el CEO de tu propio ego. Ideal para reuniones de Zoom que no querés atender, para sentarte en coworkings y mirar a todos con desprecio o simplemente para decorar tu escritorio y que parezca que sabés lo que hacés. Cada botella está llena del vacío digital más puro, extraído durante apagones estratégicos. Advertencia: no intentes conectarte, podrías quedar como un boludo. Pero eso sí, nadie se atreverá a cuestionarte cuando digas: 'Estoy trabajando desde la nube'."
+  },
+  {
+    "id": 4,
+    "name": "Caja vacía premium",
+    "price": 200,
+    "stock": 3,
+    "description": "Contiene absolutamente nada. Pero lo hace con elegancia. Ideal para regalar a personas que 'ya tienen todo'.",
+    "img": "/images/4.jpg",
+    "category": "premium",
+    "detail": "La 'Caja vacía premium' no es para cualquiera. Es para aquellos que entienden que menos es más, que el vacío también se puede envolver con moño y que lo esencial no se ve… porque no hay nada. Esta caja no solo contiene aire (¡ni siquiera el del Himalaya!), contiene significado. ¿Tenés un amigo pretencioso que todo le parece poco? Regalale esto. ¿Un cuñado que se cree minimalista? Tomá. ¿Una ex que siempre quería más? Acá tiene: nada. Fabricada con cartón reciclado de sueños rotos y pintada con la ironía del mercado moderno, esta caja se convierte en una declaración de principios. No es un chiste, es arte conceptual para tu repisa. ¿Y sabés qué? Viene con certificado de autenticidad firmado por el mismísimo vacío existencial. Porque regalar una caja vacía ya no es una falta de ganas: es un statement de diseño."
+  },
+  {
+    "id": 5,
+    "name": "Gorra invisible edición limitada",
+    "price": 150,
+    "stock": 8,
+    "description": "No la vas a ver. Nadie la va a ver. Pero vas a saber que está ahí. Nivel de swag: experto.",
+    "img": "/images/5.jpg",
+    "category": "premium",
+    "detail": "Para quienes creen que la moda no necesita pruebas tangibles, presentamos la 'Gorra invisible edición limitada'. Tan exclusiva que no existe. Literalmente. ¿Cómo se usa? Como quieras. ¿Cómo se combina? Con confianza. Cada unidad viene con una caja (vacía, pero premium) y un QR que no lleva a ningún lado, reforzando el concepto de lo efímero. Esta gorra es el epítome del estilo elevado: no deja marcas, no despeina y nunca te queda chica. Es más liviana que el ego de un influencer en ayunas. Ideal para quienes ya superaron el plano físico del vestir y habitan en un plano superior de la ironía. Usala para evitar la mirada de tus responsabilidades, para esquivar comentarios de tu jefe o simplemente para sentirte único en un mundo saturado de tangibles. Nadie la ve, pero todos la envidian. O eso decidís vos."
+  },
+  {
+    "id": 6,
+    "name": "Clavo usado certificado",
+    "price": 60,
+    "stock": 20,
+    "description": "Cada clavo tiene historia: puertas, muebles rotos, relaciones fallidas. Con certificado de autenticidad oxidada.",
+    "img": "/images/6.jpg",
+    "category": "oferta",
+    "detail": "Un clavo nuevo no tiene gracia. Pero un 'Clavo usado certificado'… ese sí que tiene pasado. Hablamos de clavos que han atravesado más que madera: emociones, crisis de identidad y por lo menos una mesa de cocina. Cada pieza viene con su propia historia (ficticia, pero convincente), escrita a mano por un escritor desempleado. Algunos sostuvieron estanterías que colapsaron con dignidad, otros fueron sacados con bronca durante reformas impulsivas. Todos tienen marcas del tiempo, del uso… y del abandono. No es sólo un objeto, es testimonio de que todo lo que se rompe puede dejar cicatriz. Ideal para colgar cuadros existencialistas, decorar lofts con onda decadente o simplemente tener algo que diga: 'yo también tengo un pasado'. Viene con certificado de autenticidad oxidada y un toque de nostalgia industrial. Porque a veces, el valor está en lo que ya no sirve para nada."
+  }
+]
