@@ -4,8 +4,8 @@ import Footer from "../componets/estaticos/Footer";
 
 const Contacto = ({cart, handleRemoveFromCart}) => {
   return (
-    <>
-      <Header cartItems={cart} handleRemoveFromCart={handleRemoveFromCart}/>
+    <>      
+    <Header />
       <h1>Conctacto</h1>
       <Footer />
     </>

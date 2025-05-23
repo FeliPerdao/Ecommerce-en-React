@@ -1,20 +1,34 @@
 import React from "react";
 import Productos from "./Productos";
-import './styleProductos.css';
+import "./styleProductos.css";
+import { useCart } from "../context/CartContext";
 
-const ProductList = ({ productos, addToCart }) => {
+const ProductList = () => {
+  const { productos, handleAddToCart } = useCart();
+  
+  console.log("productos recibido:", productos);
 
-
-  console.log("productos recibido:", productos); // 👈 esto te dice la verdad
+  if (!Array.isArray(productos) || productos.length === 0)
+  return <p>No hay productos disponibles.</p>;
 
   return (
     <>
       <h2>Galería de Productos</h2>
 
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
-      {productos.map((producto) => (
-        <Productos key={producto.id} producto={producto} addToCart={addToCart}/>
-      ))}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+        }}
+      >
+        {productos.map((producto) => (
+          <Productos
+            key={producto.id}
+            producto={producto}
+            addToCart={handleAddToCart}
+          />
+        ))}
       </div>
     </>
   );

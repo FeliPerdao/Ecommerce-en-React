@@ -1,15 +1,14 @@
-//ese módulo para crear contexto del carrito está desactivado.
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-import React, { createContext, useState, useEffect } from "react";
+const CartContext = createContext();
 
-export const CartContext = createContext();
+export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-  //const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     fetch("/data/data.json")
@@ -20,45 +19,58 @@ export const CartProvider = ({ children }) => {
           setCargando(false);
         }, 200);
       })
-      .catch((error) => {
-        console.error("Error al cargar los datos:", error);
+      .catch((err) => {
+        console.error("Error al cargar los datos:", err);
         setCargando(false);
         setError(true);
       });
   }, []);
 
   const handleAddToCart = (product) => {
-    const productInCart = cart.find((item) => item.id === product.id);
+    const productInCart = cart.find((item) => item.id === product.id); // Prueba si el producto a agregar ya existe en el carrito
     if (productInCart) {
       setCart(
         cart.map((item) =>
           item.id === productInCart.id
-            ? { ...item, quantity: item.quantity + product.quantity }
-            : item
+            ? { ...item, quantity: item.quantity + product.quantity }  // Si existe, actualiza la cantidad
+            : item // Si no existe, lo deja igual
         )
       );
     } else {
-      setCart([...cart, { ...product, quantity: product.quantity }]); // Solo si no existe
+      setCart([...cart, { ...product, quantity: product.quantity }]); // Si no existe, lo agrega al carrito
     }
   };
 
   const handleRemoveFromCart = (product) => {
-    setCart((prevCart) => {
-      return prevCart
-        .map((item) => {
-          if (item.id === product.id) {
-            if (item.quantity > 1) {
-              return { ...item, quantity: item.quantity - 1 };
-            } else {
-              return null; // Remove the item from the cart if quantity is 1
-            }
-          } else {
-            return item; // Keep the item in the cart if it's not the one being removed
-          }
-        })
-        .filter((item) => item !== null); // Filter out null items
-    });
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === product.id
+            ? item.quantity > 1
+              ? { ...item, quantity: item.quantity - 1 }
+              : null
+            : item
+        )
+        .filter(Boolean)
+    );
   };
+
+const handleRemoveItem = (product) => {
+  setCart((prev) => prev.filter((item) => item.id !== product.id)); // Elimina el producto del carrito
+}
+
+ const handleClearCart = () => setCart([]);
+
+const handleLimiteStock = () => {
+    setCart((prev) =>
+      prev.map((item) => {
+        const prod = productos.find((p) => p.id === item.id);
+        const cantidad = Math.min(item.quantity, prod?.stock ?? item.quantity);
+        return { ...item, quantity: cantidad };
+      })
+    );
+  };
+
 
   return (
     <CartContext.Provider
@@ -68,7 +80,10 @@ export const CartProvider = ({ children }) => {
         cargando,
         error,
         handleAddToCart,
+        handleRemoveItem,
         handleRemoveFromCart,
+        handleClearCart,
+        handleLimiteStock,
       }}
     >
       {children}

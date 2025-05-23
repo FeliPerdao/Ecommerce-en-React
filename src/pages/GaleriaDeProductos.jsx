@@ -3,15 +3,16 @@ import Header from "../componets/estaticos/Header";
 import Footer from "../componets/estaticos/Footer";
 import loading from "../assets/loading.gif";
 import ProductList from "../componets/ProductList";
+import { useCart } from "../context/CartContext";
 
-const GaleriaDeProductos = ({
-  productos,
-  cargando,
-  cart,
-  addToCart,
-  handleRemoveFromCart,
-}) => {
-  const categorias = ["promo", "oferta", "premium", 'otra'];
+const GaleriaDeProductos = () => {
+  const {
+    productos,
+    cargando,
+    handleAddToCart,
+  } = useCart(); // <- traés todo lo que necesites
+
+  const categorias = ["promo", "oferta", "premium", "otra"];
   const [selectedCategories, setSelectedCategories] = useState([
     "promo",
     "oferta",
@@ -35,37 +36,35 @@ const GaleriaDeProductos = ({
 
   return (
     <>
-      <Header cartItems={cart} handleRemoveFromCart={handleRemoveFromCart} />
+      <Header />
       <h1>Galería de Productos</h1>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '20px',
-        marginBottom: '20px'
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+          marginBottom: "20px",
+        }}
+      >
         {categorias.map((category) => (
-          <label 
+          <label
             key={category}
-            style={{display: 'flex', alignItems:'center', gap: '6px'}}>
+            style={{ display: "flex", alignItems: "center", gap: "6px" }}
+          >
             <input
               type="checkbox"
               checked={selectedCategories.includes(category)}
               onChange={() => handleCheckboxChange(category)}
-              />
+            />
             {category.charAt(0).toUpperCase() + category.slice(1)}
-            </label>
-        )
-        )}
+          </label>
+        ))}
       </div>
 
       {cargando ? (
         <img src={loading} alt="loading" />
       ) : (
-        <ProductList
-          addToCart={addToCart}
-          productos={filteredProducts}
-          loading={loading}
-        />
+        <ProductList />
       )}
       <Footer />
     </>

@@ -1,15 +1,15 @@
-import React from 'react'
-import Header from '../componets/estaticos/Header'
-import Footer from '../componets/estaticos/Footer'
+import React from "react";
+import Header from "../componets/estaticos/Header";
+import Footer from "../componets/estaticos/Footer";
 
-const AcercaDe = ({cart, handleRemoveFromCart}) => {
+const AcercaDe = ({ cart, handleRemoveFromCart }) => {
   return (
     <>
-    <Header cartItems={cart} handleRemoveFromCart={handleRemoveFromCart}/>
+      <Header />
       <h1>Acerca de</h1>
-      <Footer/>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default AcercaDe
+export default AcercaDe;

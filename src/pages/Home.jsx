@@ -3,28 +3,16 @@ import Header from "../componets/estaticos/Header";
 import Footer from "../componets/estaticos/Footer";
 import loading from "../assets/loading.gif";
 import ProductList from "../componets/ProductList";
+import { useCart } from "../context/CartContext";
 
-const Home = ({
-  productos,
-  cargando,
-  cart,
-  addToCart,
-  handleRemoveFromCart,
-  handleRemoveItem,
-  handleClearCart,
-  handleLimiteStock
+const Home = () => {
+  const {
+    cargando,
+  } = useCart(); // <- traés todo lo que necesites
   
-}) => {
   return (
     <>
-      <Header
-        cartItems={cart}
-        handleRemoveFromCart={handleRemoveFromCart}
-        handleRemoveItem={handleRemoveItem}
-        handleClearCart={handleClearCart}
-        productos={productos}
-        handleLimiteStock={handleLimiteStock}
-      />
+      <Header/>
       <main>
         <h1>Bienvenidos a la tienda Placebo</h1>
         <p>Tu carrito no lo necesita, pero vos sí.</p>
@@ -35,11 +23,7 @@ const Home = ({
         {cargando ? (
           <img src={loading} alt="loading" />
         ) : (
-          <ProductList
-            addToCart={addToCart}
-            productos={productos}
-            loading={loading}
-          />
+          <ProductList />
         )}
       </main>
       <Footer />

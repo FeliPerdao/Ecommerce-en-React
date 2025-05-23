@@ -5,18 +5,21 @@ import Cart from "../Cart";
 import ThemeSetter from "./ThemeSetter";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
-const Header = ({
-  cartItems,
-  handleRemoveFromCart,
-  handleRemoveItem,
-  handleClearCart,
-  productos,
-  handleLimiteStock
-}) => {
+const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
+
+  const {
+    cart,
+    handleRemoveFromCart,
+    handleRemoveItem,
+    handleClearCart,
+    productos,
+    handleLimiteStock
+  } = useCart();
 
   return (
     <header>
@@ -92,7 +95,7 @@ const Header = ({
               <i className="fa-solid fa-cart-shopping"></i>
             </button>
             <Cart
-              cartItems={cartItems}
+              cartItems={cart}
               isOpen={isCartOpen}
               onClose={() => setIsCartOpen(false)}
               handleRemoveFromCart={handleRemoveFromCart}
