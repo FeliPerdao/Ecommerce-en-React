@@ -70,6 +70,44 @@ function App() {
     });
   };
 
+  const handleRemoveItem = (product) => {
+    setCart((prevCart) => { 
+      return prevCart 
+        .map((item) => {
+          if (item.id === product.id) {
+            return null; // Remove the item from the cart
+          } else {
+            return item; // Keep the item in the cart if it's not the one being removed
+          }
+        })
+        .filter((item) => item !== null); // Filter out null items
+    });
+  }
+
+  const handleClearCart = () => {
+    setCart((prevCart) => {
+      return prevCart
+        .map((item) => {
+          return null; // Remove the item from the cart
+        })
+        .filter((item) => item !== null); // Filter out null items
+    })
+  }
+
+  const handleLimiteStock = () => {
+    setCart((prevCart) =>
+      prevCart.map((item) => {
+        const product = productos.find((p) => p.id === item.id);
+        if (!product) return item; // Si no se encuentra el producto, no hacer nada
+
+        const adjustedQuantity = Math.min(item.quantity, product.stock);
+        return { ...item, quantity: adjustedQuantity}
+      }));
+
+  }
+
+
+
   return (
     <Router>
       <Routes>
@@ -82,6 +120,9 @@ function App() {
               cargando={cargando}
               cart={cart}
               handleRemoveFromCart={handleRemoveFromCart}
+              handleRemoveItem={handleRemoveItem}
+              handleClearCart={handleClearCart}
+              handleLimiteStock={handleLimiteStock}
            />
           }
         />
@@ -89,7 +130,12 @@ function App() {
         <Route
           path="/acercade"
           element={
-            <AcercaDe cart={cart}/>
+            <AcercaDe 
+              cart={cart} 
+              handleRemoveFromCart={handleRemoveFromCart} 
+              handleRemoveItem={handleRemoveItem}
+              handleClearCart={handleClearCart}
+            />
           }
         />
 
@@ -102,6 +148,8 @@ function App() {
               cargando={cargando}
               cart={cart}
               handleRemoveFromCart={handleRemoveFromCart}
+              handleRemoveItem={handleRemoveItem}
+              handleClearCart={handleClearCart}
              />
           }
         />
@@ -114,7 +162,12 @@ function App() {
         <Route
           path="/contacto"
           element={
-            <Contacto cart={cart} handleRemoveFromCart={handleRemoveFromCart} />
+            <Contacto 
+              cart={cart} 
+              handleRemoveFromCart={handleRemoveFromCart} 
+              handleRemoveItem={handleRemoveItem}
+              handleClearCart={handleClearCart}
+            />
           }
         />
 

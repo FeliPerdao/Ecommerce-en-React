@@ -6,12 +6,17 @@ import ThemeSetter from "./ThemeSetter";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 
-
-const Header = ({ cartItems, handleRemoveFromCart }) => {
+const Header = ({
+  cartItems,
+  handleRemoveFromCart,
+  handleRemoveItem,
+  handleClearCart,
+  productos,
+  handleLimiteStock
+}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
-
 
   return (
     <header>
@@ -43,22 +48,42 @@ const Header = ({ cartItems, handleRemoveFromCart }) => {
       <nav>
         <ul>
           <li>
-            <Link to="/" className={`link ${location.pathname === "/" ? "active-link" : ""}`}>
+            <Link
+              to="/"
+              className={`link ${
+                location.pathname === "/" ? "active-link" : ""
+              }`}
+            >
               Inicio
             </Link>
           </li>
           <li>
-            <Link to="/acercade" className={`link ${location.pathname === "/acercade" ? "active-link" : ""}`}>
+            <Link
+              to="/acercade"
+              className={`link ${
+                location.pathname === "/acercade" ? "active-link" : ""
+              }`}
+            >
               Sobre Nosotros
             </Link>
           </li>
           <li>
-            <Link to="/productos" className={`link ${location.pathname.startsWith("/productos") ? "active-link" : ""}`}>
+            <Link
+              to="/productos"
+              className={`link ${
+                location.pathname.startsWith("/productos") ? "active-link" : ""
+              }`}
+            >
               Galeria de Productos
             </Link>
           </li>
           <li>
-            <Link to="/contacto" className={`link ${location.pathname === "/contacto" ? "active-link" : ""}`}>
+            <Link
+              to="/contacto"
+              className={`link ${
+                location.pathname === "/contacto" ? "active-link" : ""
+              }`}
+            >
               Contacto
             </Link>
           </li>
@@ -71,6 +96,10 @@ const Header = ({ cartItems, handleRemoveFromCart }) => {
               isOpen={isCartOpen}
               onClose={() => setIsCartOpen(false)}
               handleRemoveFromCart={handleRemoveFromCart}
+              handleClearCart={handleClearCart}
+              handleRemoveItem={handleRemoveItem}
+              productos={productos}
+              handleLimiteStock={handleLimiteStock}
             />
           </li>
         </ul>

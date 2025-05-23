@@ -10,10 +10,21 @@ const Home = ({
   cart,
   addToCart,
   handleRemoveFromCart,
+  handleRemoveItem,
+  handleClearCart,
+  handleLimiteStock
+  
 }) => {
   return (
     <>
-      <Header cartItems={cart} handleRemoveFromCart={handleRemoveFromCart} />
+      <Header
+        cartItems={cart}
+        handleRemoveFromCart={handleRemoveFromCart}
+        handleRemoveItem={handleRemoveItem}
+        handleClearCart={handleClearCart}
+        productos={productos}
+        handleLimiteStock={handleLimiteStock}
+      />
       <main>
         <h1>Bienvenidos a la tienda Placebo</h1>
         <p>Tu carrito no lo necesita, pero vos sí.</p>
