@@ -28,6 +28,11 @@ This is a **learning-focused** practice project built to explore the fundamental
 
 ---
 
+## 🖼️ Imagen / Screenshot
+
+![Vista previa de la aplicación / App preview](./docs/demo.jpg)
+
+
 ## 🚀 Instalación / Installation
 
 ```bash
