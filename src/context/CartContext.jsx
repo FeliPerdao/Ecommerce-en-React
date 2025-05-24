@@ -1,31 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useProducts } from "./ProductsContext";
 
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch("/data/data.json")
-      .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        setTimeout(() => {
-          setProductos(datos);
-          setCargando(false);
-        }, 200);
-      })
-      .catch((err) => {
-        console.error("Error al cargar los datos:", err);
-        setCargando(false);
-        setError(true);
-      });
-  }, []);
-
+  const { productos } = useProducts();
+  
+  const [cart, setCart] = useState([]); 
+  
   const handleAddToCart = (product) => {
     const productInCart = cart.find((item) => item.id === product.id); // Prueba si el producto a agregar ya existe en el carrito
     if (productInCart) {
@@ -76,9 +60,6 @@ const handleLimiteStock = () => {
     <CartContext.Provider
       value={{
         cart,
-        productos,
-        cargando,
-        error,
         handleAddToCart,
         handleRemoveItem,
         handleRemoveFromCart,

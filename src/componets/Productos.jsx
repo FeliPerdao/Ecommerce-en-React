@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import './styleProductos.css';
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 
-const Productos = ({producto, addToCart}) => {
+const Productos = ({ producto }) => {
+  const { handleAddToCart } = useCart();
 
   const [cantidad, setCantidad] = useState(1);
 
@@ -26,7 +28,7 @@ const Productos = ({producto, addToCart}) => {
         <button className='qtyButton' onClick={increase}>+</button>
       </div>
 
-      <button onClick={() => addToCart({...producto, quantity: cantidad})}>Agregar al carrito</button>
+      <button onClick={() => handleAddToCart({...producto, quantity: cantidad})}>Agregar al carrito</button>
 
       <Link to={`/productos/${producto.id}`}>Ver detalle</Link>
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -10,7 +10,6 @@ import DetalleProductos from "./componets/DetalleProductos";
 import Login from "./pages/login";
 import RutaProtegida from "./auth/RutaProtegida";
 import Admin from "./pages/Admin";
-import { useAuth } from "./context/AuthContext";
 //import { CartContext } from "./context/CartContext";
 
 function App() {

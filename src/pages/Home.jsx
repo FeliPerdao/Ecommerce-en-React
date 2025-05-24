@@ -3,16 +3,14 @@ import Header from "../componets/estaticos/Header";
 import Footer from "../componets/estaticos/Footer";
 import loading from "../assets/loading.gif";
 import ProductList from "../componets/ProductList";
-import { useCart } from "../context/CartContext";
+import { useProducts } from "../context/ProductsContext";
 
 const Home = () => {
-  const {
-    cargando,
-  } = useCart(); // <- traés todo lo que necesites
-  
+  const { cargando } = useProducts();
+
   return (
     <>
-      <Header/>
+      <Header />
       <main>
         <h1>Bienvenidos a la tienda Placebo</h1>
         <p>Tu carrito no lo necesita, pero vos sí.</p>
@@ -20,11 +18,7 @@ const Home = () => {
           Cosas completamente inútiles con una utilidad emocional
           incuestionable.
         </p>
-        {cargando ? (
-          <img src={loading} alt="loading" />
-        ) : (
-          <ProductList />
-        )}
+        {cargando ? <img src={loading} alt="loading" /> : <ProductList />}
       </main>
       <Footer />
     </>

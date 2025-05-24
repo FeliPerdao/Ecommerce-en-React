@@ -6,15 +6,18 @@ import App from "./App.jsx";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { ProductsProvider } from "./context/ProductsContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
       <AuthProvider>
         <ThemeProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </ProductsProvider>
         </ThemeProvider>
       </AuthProvider>
     </Router>

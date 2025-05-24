@@ -1,15 +1,15 @@
 import React from "react";
 import Productos from "./Productos";
 import "./styleProductos.css";
-import { useCart } from "../context/CartContext";
+import { useProducts } from "../context/ProductsContext";
 
 const ProductList = () => {
-  const { productos, handleAddToCart } = useCart();
+  const { productos, filteredProducts } = useProducts();
   
-  console.log("productos recibido:", productos);
+  console.log("productos recibido:", filteredProducts);
 
-  if (!Array.isArray(productos) || productos.length === 0)
-  return <p>No hay productos disponibles.</p>;
+  if (!Array.isArray(filteredProducts) || filteredProducts.length === 0)
+  return <p>No hay productos disponibles en la categoría seleccionada.</p>;
 
   return (
     <>
@@ -22,11 +22,10 @@ const ProductList = () => {
           justifyContent: "space-evenly",
         }}
       >
-        {productos.map((producto) => (
+        {filteredProducts.map((producto) => (
           <Productos
             key={producto.id}
             producto={producto}
-            addToCart={handleAddToCart}
           />
         ))}
       </div>

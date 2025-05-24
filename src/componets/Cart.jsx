@@ -1,92 +1,98 @@
-  import React, { useEffect } from "react";
-  import "./styleCart.css";
+import React, { useEffect } from "react";
+import "./styleCart.css";
+import { useProducts } from "../context/ProductsContext";
+import { useCart } from "../context/CartContext";
 
-  const Cart = ({
-    cartItems,
-    isOpen,
-    onClose,
+const Cart = ({ isOpen, onClose }) => {
+  const {
+    cart,
     handleRemoveFromCart,
     handleRemoveItem,
     handleClearCart,
-    productos,
-    handleLimiteStock,
-  }) => {
-    const total = cartItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
+    handleLimiteStock
+  } = useCart();
 
-    useEffect(() => {
-      const exceededStock = cartItems.some((item) => {
-        const product = productos.find((p) => p.id === item.id);
-        return product && item.quantity > product.stock;
-      });
+  const { productos } = useProducts();
+  
+  const cartItems = cart;
+  
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+  
 
-      if (exceededStock) {
-        alert(
-          "Algunos productos exceden el stock disponible. Se ajustarán automáticamente."
-        );
-        handleLimiteStock(); // Esta función viene como prop desde App.jsx
-      }
-    }, [cartItems, productos, handleLimiteStock]);
+  useEffect(() => {
+    const exceededStock = cartItems.some((item) => {
+      const product = productos.find((p) => p.id === item.id);
+      return product && item.quantity > product.stock;
+    });
 
-    return (
-      <div className={`cart-drawer ${isOpen ? "open" : ""}`}>
-        <div className="cart-header">
-          <h2 style={{ color: "black" }}>
-            <i
-              style={{ color: "black" }}
-              className="fa-solid fa-cart-shopping"
-            ></i>{" "}
-            Carrito de Compras
-          </h2>
-          <button className="close-button" onClick={onClose}>
-            X
-          </button>
-        </div>
+    if (exceededStock) {
+      alert(
+        "Algunos productos exceden el stock disponible. Se ajustarán automáticamente."
+      );
+      handleLimiteStock();
+    }
+  }, [cartItems, productos, handleLimiteStock]);
 
-        <div className="cart-content">
-          {cartItems.length === 0 ? (
-            <p style={{ color: "red" }}>El carrito está vacío</p>
-          ) : (
-            <>
-              <ul className="cart-list">
-                {cartItems.map((item) => (
-                  <li key={item.id} className="cart-item">
-                    <div className="cart-item-info">
-                      <span>
-                        {item.quantity} x {item.name}
-                      </span>
-                      <span>
-                        ${item.price}/un - Total: ${item.quantity * item.price}
-                      </span>
-                    </div>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleRemoveFromCart(item)}
-                    >
-                      -1
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleRemoveItem(item)}
-                    >
-                      <i className="fa-solid fa-trash"> </i>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <div className="cart-total">Total de la compra: ${total}</div>
-              <div>
-                <button className="delete-btn" onClick={() => handleClearCart()}>
-                  Esvaciar Carrito
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+  return (
+    <div className={`cart-drawer ${isOpen ? "open" : ""}`}>
+      <div className="cart-header">
+        <h2 style={{ color: "black" }}>
+          <i
+            style={{ color: "black" }}
+            className="fa-solid fa-cart-shopping"
+          ></i>{" "}
+          Carrito de Compras
+        </h2>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
       </div>
-    );
-  };
 
-  export default Cart;
+      <div className="cart-content">
+        {cartItems.length === 0 ? (
+          <p style={{ color: "red" }}>El carrito está vacío</p>
+        ) : (
+          <>
+            <ul className="cart-list">
+              {cartItems.map((item) => (
+                <li key={item.id} className="cart-item">
+                  <div className="cart-item-info">
+                    <span>
+                      {item.quantity} x {item.name}
+                    </span>
+                    <span>
+                      ${item.price}/un - Total: ${item.quantity * item.price}
+                    </span>
+                  </div>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleRemoveFromCart(item)}
+                  >
+                    -1
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleRemoveItem(item)}
+                  >
+                    <i className="fa-solid fa-trash"> </i>
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className="cart-total">Total de la compra: ${total}</div>
+            <div>
+              <button className="delete-btn" onClick={() => handleClearCart()}>
+                Esvaciar Carrito
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Cart;
