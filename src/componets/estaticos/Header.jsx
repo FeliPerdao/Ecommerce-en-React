@@ -11,7 +11,6 @@ const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
 
-
   return (
     <header>
       <div
@@ -23,7 +22,7 @@ const Header = () => {
           padding: "0 20px",
         }}
       >
-        <label
+        {/* <label
           style={{
             display: "flex",
             alignItems: "center",
@@ -36,8 +35,21 @@ const Header = () => {
             onChange={(e) => setIsAuthenticated(e.target.checked)}
           />
           Administrador
-        </label>
+        </label> */}
         <ThemeSetter />
+        {isAuthenticated ? (
+          <button
+            onClick={() => {
+              setIsAuthenticated(false);
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+        )}
       </div>
       <nav>
         <ul>

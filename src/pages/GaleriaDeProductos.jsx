@@ -11,13 +11,13 @@ const GaleriaDeProductos = () => {
     categorias,
     handleCheckboxChange,
     selectedCategories,
-    setIsGaleria
+    setIsGaleria,
   } = useProducts();
 
   useEffect(() => {
     setIsGaleria(true);
     return () => setIsGaleria(false); // Resetea isGaleria cuando el componente es desmontado.
-  },[]);
+  }, []);
 
   return (
     <>

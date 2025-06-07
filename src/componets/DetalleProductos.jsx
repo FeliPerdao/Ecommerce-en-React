@@ -1,8 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useProducts } from "../context/ProductsContext";
 
-const DetalleProductos = ({ productos }) => {
+const DetalleProductos = () => {
+  const { productos } = useProducts();
   const { id } = useParams();
 
   const product = productos.find((producto) => producto.id == id);
