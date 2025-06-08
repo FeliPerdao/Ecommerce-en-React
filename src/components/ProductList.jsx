@@ -4,12 +4,12 @@ import "./styleProductos.css";
 import { useProducts } from "../context/ProductsContext";
 
 const ProductList = () => {
-  const { productos, filteredProducts } = useProducts();
-  
+  const { filteredProducts } = useProducts();
+
   console.log("productos recibido:", filteredProducts);
 
   if (!Array.isArray(filteredProducts) || filteredProducts.length === 0)
-  return <p>No hay productos disponibles en la categoría seleccionada.</p>;
+    return <p>No hay productos disponibles en la categoría seleccionada.</p>;
 
   return (
     <>
@@ -23,10 +23,7 @@ const ProductList = () => {
         }}
       >
         {filteredProducts.map((producto) => (
-          <Productos
-            key={producto.id}
-            producto={producto}
-          />
+          <Productos key={producto.id} producto={producto} />
         ))}
       </div>
     </>

@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../componets/estaticos/Header";
-import Footer from "../componets/estaticos/Footer";
+import Header from "../components/estaticos/Header";
+import Footer from "../components/estaticos/Footer";
 
-const AcercaDe = ({ cart, handleRemoveFromCart }) => {
+const AcercaDe = () => {
   return (
     <>
       <Header />
