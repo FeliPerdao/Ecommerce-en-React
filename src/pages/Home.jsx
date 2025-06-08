@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../componets/estaticos/Header";
-import Footer from "../componets/estaticos/Footer";
+import Header from "../components/estaticos/Header";
+import Footer from "../components/estaticos/Footer";
 import loading from "../assets/loading.gif";
-import ProductList from "../componets/ProductList";
+import ProductList from "../components/ProductList";
 import { useProducts } from "../context/ProductsContext";
 
 const Home = () => {

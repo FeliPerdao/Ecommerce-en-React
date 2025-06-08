@@ -11,6 +11,11 @@ const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
 
+  const handleClearLocalStorage = () => {
+    localStorage.clear();
+    alert("LocalStorage eliminado. Recargá la página para ver cambios.");
+  };
+
   return (
     <header>
       <div
@@ -22,34 +27,43 @@ const Header = () => {
           padding: "0 20px",
         }}
       >
-        {/* <label
+        <ThemeSetter />
+        <div
+          className="theme-btn-container"
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: "5px",
+            flexDirection: "column", // para que los botones queden uno abajo del otro
+            justifyContent: "center",
+            alignItems: "flex-start",
+            padding: "0 20px",
+            gap: "10px", // espacio entre botones>
           }}
         >
-          <input
-            type="checkbox"
-            checked={isAuthenticated}
-            onChange={(e) => setIsAuthenticated(e.target.checked)}
-          />
-          Administrador
-        </label> */}
-        <ThemeSetter />
-        {isAuthenticated ? (
-          <button
-            onClick={() => {
-              setIsAuthenticated(false);
-            }}
-          >
-            Logout
-          </button>
-        ) : (
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-        )}
+          {isAuthenticated ? (
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Link to="/admin">
+                <button>Panel Administrador</button>
+              </Link>
+              <button
+                onClick={() => {
+                  setIsAuthenticated(false);
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+          )}
+        </div>
+        <button
+          onClick={handleClearLocalStorage}
+          style={{ fontSize: "0.9rem" }}
+        >
+          Limpiar localStorage
+        </button>
       </div>
       <nav>
         <ul>

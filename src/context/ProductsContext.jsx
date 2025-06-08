@@ -23,6 +23,12 @@ export const ProductsProvider = ({ children }) => {
   }, [isGaleria]);
 
   useEffect(() => {
+    const productosGuardados = localStorage.getItem("productos");
+
+    if (productosGuardados) {
+      setProductos(JSON.parse(productosGuardados));
+      setCargando(false);
+    } else  {
     fetch("/data/data.json")
       .then((respuesta) => respuesta.json())
       .then((datos) => {
@@ -36,7 +42,13 @@ export const ProductsProvider = ({ children }) => {
         setCargando(false);
         setError(true);
       });
+    }
   }, []);
+
+  const actualizarProductos = (nuevosProductos) => {
+    localStorage.setItem("productos", JSON.stringify(nuevosProductos));
+    setProductos(nuevosProductos);
+  };
 
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prev) =>
@@ -63,7 +75,8 @@ export const ProductsProvider = ({ children }) => {
         error,
         handleCheckboxChange,
         filteredProducts,
-        setIsGaleria
+        setIsGaleria,
+        actualizarProductos
       }}
     >
       {children}
