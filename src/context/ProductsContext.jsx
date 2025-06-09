@@ -29,7 +29,7 @@ export const ProductsProvider = ({ children }) => {
       setProductos(JSON.parse(productosGuardados));
       setCargando(false);
     } else  {
-    fetch("/data/data.json")
+    fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI")
       .then((respuesta) => respuesta.json())
       .then((datos) => {
         setTimeout(() => {

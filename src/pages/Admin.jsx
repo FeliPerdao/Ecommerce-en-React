@@ -13,7 +13,7 @@ const Admin = () => {
 
     if (!productosGuardados) {
       //En la primera vez se carga desde data.json
-      fetch("/data/data.json")
+      fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI")
         .then((res) => res.json())
         .then((data) => {
           localStorage.setItem("productos", JSON.stringify(data));
@@ -35,10 +35,13 @@ const Admin = () => {
     setOpen(false);
   };
 
-  const eliminarProducto = (index) => {
-    const nuevosProductos = productos.filter((_, i) => i !== index);
-    localStorage.setItem("productos", JSON.stringify(nuevosProductos));
-    actualizarProductos(nuevosProductos);
+  const eliminarProducto = async (index) => {
+    const confirmar = window.confirm("Estas segura de eliminar el producto?");
+    if (confirmar) {
+      const nuevosProductos = productos.filter((_, i) => i !== index);
+      localStorage.setItem("productos", JSON.stringify(nuevosProductos));
+      actualizarProductos(nuevosProductos);
+    }
   };
 
   return (

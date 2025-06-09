@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch("data/users.json");
+      const res = await fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI");
       const users = await res.json();
 
       const foundUser = users.find(

@@ -5,8 +5,8 @@ const FormularioProducto = ({ onAgregar }) => {
     name: "",
     price: "",
     description: "",
-    stock: 0,
-    img: "",
+    stock: "",
+    img: "/images/blank.jpg",
     category: "oferta",
     detail: "Sin detalles adicionales",
   });
@@ -25,8 +25,8 @@ const FormularioProducto = ({ onAgregar }) => {
       name: "",
       price: "",
       description: "",
-      stock: 0,
-      img: "",
+      stock: "",
+      img: "/images/blank.jpg",
       category: "oferta",
       detail: "Sin detalles adicionales",
     });
@@ -57,6 +57,36 @@ const FormularioProducto = ({ onAgregar }) => {
           min="0"
         />
         {errores.price && <p style={{ color: "red" }}>{errores.price}</p>}
+      </div>
+      <div>
+        <label>Stock:</label>
+        <input
+          type="number"
+          name="stock"
+          value={producto.stock}
+          onChange={handleChange}
+          required
+          min="0"
+        />
+        {errores.stock && <p style={{ color: "red" }}>{errores.stock}</p>}
+      </div>
+      <div>
+        <label>Categoría:</label>
+        <select
+          name="category"
+          value={producto.category}
+          onChange={handleChange}
+          required
+          min="0"
+        >
+          <option value="" disabled>
+            -- Seleccioná una categoría --
+          </option>
+          <option value="oferta">Oferta</option>
+          <option value="promo">Promo</option>
+          <option value="premium">Premium</option>
+        </select>
+        {errores.category && <p style={{ color: "red" }}>{errores.category}</p>}
       </div>
       <div>
         <label>Descripción:</label>
