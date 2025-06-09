@@ -7,7 +7,6 @@ const Admin = () => {
   const { productos, actualizarProductos, urlApi } = useProducts();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-}
 
   const agregarProducto = async (producto) => {
     try {
