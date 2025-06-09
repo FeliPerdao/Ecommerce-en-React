@@ -5,6 +5,7 @@ const ProductsContext = createContext();
 export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
+  const urlApi = "https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI";
   const [productos, setProductos] = useState([]);
   const categorias = ["promo", "oferta", "premium"];
   const [selectedCategories, setSelectedCategories] = useState([
@@ -23,13 +24,7 @@ export const ProductsProvider = ({ children }) => {
   }, [isGaleria]);
 
   useEffect(() => {
-    const productosGuardados = localStorage.getItem("productos");
-
-    if (productosGuardados) {
-      setProductos(JSON.parse(productosGuardados));
-      setCargando(false);
-    } else  {
-    fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI")
+    fetch(urlApi)
       .then((respuesta) => respuesta.json())
       .then((datos) => {
         setTimeout(() => {
@@ -42,13 +37,7 @@ export const ProductsProvider = ({ children }) => {
         setCargando(false);
         setError(true);
       });
-    }
   }, []);
-
-  const actualizarProductos = (nuevosProductos) => {
-    localStorage.setItem("productos", JSON.stringify(nuevosProductos));
-    setProductos(nuevosProductos);
-  };
 
   const handleCheckboxChange = (category) => {
     setSelectedCategories((prev) =>
@@ -76,7 +65,7 @@ export const ProductsProvider = ({ children }) => {
         handleCheckboxChange,
         filteredProducts,
         setIsGaleria,
-        actualizarProductos
+        urlApi
       }}
     >
       {children}

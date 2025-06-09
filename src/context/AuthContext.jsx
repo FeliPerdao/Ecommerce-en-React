@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI");
+      const res = await fetch("/data/users.json");
       const users = await res.json();
 
       const foundUser = users.find(
@@ -47,10 +47,6 @@ export const AuthProvider = ({ children }) => {
       setError({ email: "Error al iniciar sesión, intente más tarde:", err });
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated);
-  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider

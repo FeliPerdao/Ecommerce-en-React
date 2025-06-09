@@ -4,43 +4,44 @@ import { useProducts } from "../context/ProductsContext";
 import FormularioProducto from "../components/estaticos/FormularioProducto";
 
 const Admin = () => {
-  const { productos, actualizarProductos } = useProducts();
+  const { productos, actualizarProductos, urlApi } = useProducts();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+}
 
-  useEffect(() => {
-    const productosGuardados = localStorage.getItem("productos");
-
-    if (!productosGuardados) {
-      //En la primera vez se carga desde data.json
-      fetch("https://6846f66a7dbda7ee7ab10a0f.mockapi.io/PlaceboAPI")
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem("productos", JSON.stringify(data));
-          actualizarProductos(data);
-          setLoading(false);
-        })
-        .catch((err) => console.error("Error cargando productos:", err));
-    } else {
-      //Si ya hay algo en localStorage
-      actualizarProductos(JSON.parse(productosGuardados));
-      setLoading(false);
+  const agregarProducto = async (producto) => {
+    try {
+      const respuesta = await fetch(urlApi, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(producto),
+      });
+      if (!respuesta.ok) {
+        throw new Error("Error al agregar producto");
+      }
+      const data = await respuesta.json();
+      alert("Producto agregado correctamente");
+    } catch (error) {
+      console.log(error.message);
     }
-  }, []);
-
-  const agregarProducto = (nuevoProducto) => {
-    const nuevosProductos = [...productos, nuevoProducto];
-    localStorage.setItem("productos", JSON.stringify(nuevosProductos));
-    actualizarProductos(nuevosProductos);
     setOpen(false);
   };
 
-  const eliminarProducto = async (index) => {
-    const confirmar = window.confirm("Estas segura de eliminar el producto?");
+  const eliminarProducto = async (id) => {
+    const confirmar = window.confirm("Estás seguro de eliminar el producto?");
     if (confirmar) {
-      const nuevosProductos = productos.filter((_, i) => i !== index);
-      localStorage.setItem("productos", JSON.stringify(nuevosProductos));
-      actualizarProductos(nuevosProductos);
+      try {
+        const respuesta = await fetch(`${urlApi}/${id}`, {
+          method: "DELETE",
+        });
+        if (!respuesta.ok) throw Error("Error al eliminar");
+
+        alert("Producto eliminado correctamente");
+      } catch (error) {
+        alert("Hubo un problema al eliminar el producto", error);
+      }
     }
   };
 
@@ -79,7 +80,7 @@ const Admin = () => {
                   <button className="editButton">Editar</button>
                   <button
                     className="deleteButton"
-                    onClick={() => eliminarProducto(index)}
+                    onClick={() => eliminarProducto(product.id)}
                   >
                     Eliminar
                   </button>

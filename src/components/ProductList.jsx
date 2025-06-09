@@ -6,8 +6,6 @@ import { useProducts } from "../context/ProductsContext";
 const ProductList = () => {
   const { filteredProducts } = useProducts();
 
-  console.log("productos recibido:", filteredProducts);
-
   if (!Array.isArray(filteredProducts) || filteredProducts.length === 0)
     return <p>No hay productos disponibles en la categoría seleccionada.</p>;
 

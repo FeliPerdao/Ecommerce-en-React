@@ -11,11 +11,6 @@ const Header = () => {
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
 
-  const handleClearLocalStorage = () => {
-    localStorage.clear();
-    alert("LocalStorage eliminado. Recargá la página para ver cambios.");
-  };
-
   return (
     <header>
       <div
@@ -58,12 +53,6 @@ const Header = () => {
             </Link>
           )}
         </div>
-        <button
-          onClick={handleClearLocalStorage}
-          style={{ fontSize: "0.9rem" }}
-        >
-          Limpiar localStorage
-        </button>
       </div>
       <nav>
         <ul>
