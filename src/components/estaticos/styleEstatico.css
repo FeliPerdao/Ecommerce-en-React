@@ -1,68 +1,83 @@
-nav{
-    background-color: #333;
-    color: white;
-    padding: 10px;
+nav {
+  background-color: #333;
+  color: white;
+  padding: 10px;
 }
 
-ul{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    align-items: center;
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  align-items: center;
 }
 
-.link{
-    color: white;
-    text-decoration: none;
+.link {
+  color: white;
+  text-decoration: none;
 }
 
-footer{
-    background-color: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-    margin-top: 20px;
+footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-.btnCart{
-    background-color: transparent;
-    border: none;
+.btnCart {
+  background-color: transparent;
+  border: none;
 }
 
-.fa-cart-shopping{
-    color:red;
+.fa-cart-shopping {
+  color: red;
 }
 
 body.light {
-    background-color: #ffffff;
-    color: #000000;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 body.dark {
-    background-color: #121212;
-    color: #ffffff;
+  background-color: #121212;
+  color: #ffffff;
 }
 
 footer.light {
-    background-color:rgb(195, 195, 195);
-    color: #000000;
+  background-color: rgb(195, 195, 195);
+  color: #000000;
 }
 
 footer.dark {
-    background-color:rgba(85, 85, 85, 0.3);
-    color: #ffffff;
+  background-color: rgba(85, 85, 85, 0.3);
+  color: #ffffff;
 }
 
 .theme-btn-container {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 20px 0 20px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px 0 20px;
+  margin-bottom: 10px;
 }
 
 .active-link {
-  color: red ;
+  color: red;
   font-weight: bold;
   border: 2px solid red;
   padding: 5px;
+}
+
+.buttons {
+  padding: 10px 20px;
+  margin: 2px;
+  border: 3px solid #999;
+  border-radius: 5px;
+}
+.buttons.light {
+  background-color: #eee;
+  color: #000;
+}
+.buttons.dark {
+  background-color: #333;
+  color: #fff;
 }

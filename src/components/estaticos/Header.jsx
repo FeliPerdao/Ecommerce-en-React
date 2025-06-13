@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./styleEstatico.css";
 import Cart from "../Cart";
 import ThemeSetter from "./ThemeSetter";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useAuth();
   const location = useLocation();
+  const { theme } = useContext(ThemeContext);
 
   return (
     <header>
@@ -27,29 +29,32 @@ const Header = () => {
           className="theme-btn-container"
           style={{
             display: "flex",
-            flexDirection: "column", // para que los botones queden uno abajo del otro
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",
             padding: "0 20px",
-            gap: "10px", // espacio entre botones>
+            gap: "10px",
           }}
         >
           {isAuthenticated ? (
             <div style={{ display: "flex", flexDirection: "column" }}>
               <Link to="/admin">
-                <button>Panel Administrador</button>
+                <button className={`buttons ${theme}`}>
+                  Panel Administrador
+                </button>
               </Link>
               <button
                 onClick={() => {
                   setIsAuthenticated(false);
                 }}
+                className={`buttons ${theme}`}
               >
                 Logout
               </button>
             </div>
           ) : (
             <Link to="/login">
-              <button>Login</button>
+              <button className={`buttons ${theme}`}>Login</button>
             </Link>
           )}
         </div>

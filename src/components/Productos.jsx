@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./styleProductos.css";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { ThemeContext } from "../context/ThemeContext"
 
 const Productos = ({ producto }) => {
   const { handleAddToCart } = useCart();
+  const { theme } = useContext(ThemeContext); //obtiene el tema actual
 
   const [cantidad, setCantidad] = useState(1);
 
@@ -13,7 +15,7 @@ const Productos = ({ producto }) => {
   const decrease = () => setCantidad((prev) => (prev > 1 ? prev - 1 : 1));
 
   return (
-    <section className="card">
+    <section className={`card ${theme}`}>
       <div className="imageContainer">
         <img src={producto.img} alt="" className="imagen" />
       </div>

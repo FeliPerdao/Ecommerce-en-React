@@ -13,9 +13,24 @@ export const ProductsProvider = ({ children }) => {
     "oferta",
     "premium",
   ]);
-  const [isGaleria, setIsGaleria] = useState(false);;
+  const [isGaleria, setIsGaleria] = useState(false);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+
+  const fetchProductos = async () => {
+    //funcion exportada para hacer actualizar despues de apretar un moton que modifica objetos.
+    setCargando(true);
+    try {
+      const respuesta = await fetch(urlApi);
+      const datos = await respuesta.json();
+      setProductos(datos);
+    } catch (err) {
+      console.error("Error al cargar los datos:", err);
+      setError(true);
+    } finally {
+      setCargando(false);
+    }
+  };
 
   useEffect(() => {
     if (!isGaleria) {
@@ -24,19 +39,7 @@ export const ProductsProvider = ({ children }) => {
   }, [isGaleria]);
 
   useEffect(() => {
-    fetch(urlApi)
-      .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        setTimeout(() => {
-          setProductos(datos);
-          setCargando(false);
-        }, 200);
-      })
-      .catch((err) => {
-        console.error("Error al cargar los datos:", err);
-        setCargando(false);
-        setError(true);
-      });
+    fetchProductos();
   }, []);
 
   const handleCheckboxChange = (category) => {
@@ -47,10 +50,10 @@ export const ProductsProvider = ({ children }) => {
     );
   };
 
-  const filteredProducts  = isGaleria
+  const filteredProducts = isGaleria
     ? productos.filter((producto) =>
-            selectedCategories.includes(producto.category)
-        )
+        selectedCategories.includes(producto.category)
+      )
     : productos;
 
   return (
@@ -65,7 +68,8 @@ export const ProductsProvider = ({ children }) => {
         handleCheckboxChange,
         filteredProducts,
         setIsGaleria,
-        urlApi
+        urlApi,
+        fetchProductos,
       }}
     >
       {children}

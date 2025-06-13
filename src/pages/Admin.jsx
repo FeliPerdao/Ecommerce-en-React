@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../context/ProductsContext";
 import FormularioProducto from "../components/estaticos/FormularioProducto";
+import loading from "../assets/loading.gif";
 
 const Admin = () => {
-  const { productos, actualizarProductos, urlApi } = useProducts();
-  const [loading, setLoading] = useState(false);
+  const { productos, urlApi, cargando, fetchProductos } = useProducts(); //El fetchProducts viene como Context para actualizar despues de apretar boton
   const [open, setOpen] = useState(false);
+  const [productoEditando, setProductoEditando] = useState(null);
 
   const agregarProducto = async (producto) => {
     try {
@@ -20,11 +21,30 @@ const Admin = () => {
       if (!respuesta.ok) {
         throw new Error("Error al agregar producto");
       }
-      const data = await respuesta.json();
+      await respuesta.json();
       alert("Producto agregado correctamente");
+      fetchProductos();
     } catch (error) {
       console.log(error.message);
     }
+    setOpen(false);
+  };
+
+  const editarProducto = async (producto) => {
+    try {
+      const res = await fetch(`${urlApi}/${producto.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(producto),
+      });
+      if (!res.ok) throw new Error("Error al editar");
+      await res.json();
+      alert("Producto editado correctamente");
+      fetchProductos();
+    } catch (err) {
+      console.error(err);
+    }
+    setProductoEditando(null);
     setOpen(false);
   };
 
@@ -38,6 +58,7 @@ const Admin = () => {
         if (!respuesta.ok) throw Error("Error al eliminar");
 
         alert("Producto eliminado correctamente");
+        fetchProductos();
       } catch (error) {
         alert("Hubo un problema al eliminar el producto", error);
       }
@@ -46,8 +67,10 @@ const Admin = () => {
 
   return (
     <div className="container">
-      {loading ? (
-        <p>Cargando...</p>
+      {cargando ? (
+        <p>
+          <img src={loading} alt="loading" />
+        </p>
       ) : (
         <>
           <nav>
@@ -62,7 +85,7 @@ const Admin = () => {
           </nav>
           <h1>Panel Administrativo</h1>
           <ul className="list">
-            {productos.map((product, index) => (
+            {productos.map((product) => (
               <li
                 key={product.id}
                 className="listItem"
@@ -72,11 +95,20 @@ const Admin = () => {
                   src={product.img}
                   alt={product.name}
                   className="listItemImage"
+                  style={{ maxWidth: "100px", height: "100%" }}
                 />
                 <span>{product.name}</span>
                 <span>${product.price}</span>
                 <div>
-                  <button className="editButton">Editar</button>
+                  <button
+                    className="editButton"
+                    onClick={() => {
+                      setProductoEditando(product);
+                      setOpen(true);
+                    }}
+                  >
+                    Editar
+                  </button>
                   <button
                     className="deleteButton"
                     onClick={() => eliminarProducto(product.id)}
@@ -87,10 +119,15 @@ const Admin = () => {
               </li>
             ))}
           </ul>
+          <button onClick={() => setOpen(true)}>Agregar nuevo producto</button>
+          {open && (
+            <FormularioProducto
+              onSubmit={productoEditando ? editarProducto : agregarProducto}
+              initialData={productoEditando}
+            />
+          )}
         </>
       )}
-      <button onClick={() => setOpen(true)}>Agregar nuevo producto</button>
-      {open && <FormularioProducto onAgregar={agregarProducto} />}
     </div>
   );
 };

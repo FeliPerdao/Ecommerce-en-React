@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FormularioProducto = ({ onAgregar }) => {
+const FormularioProducto = ({ onSubmit }) => {
   const [producto, setProducto] = useState({
     name: "",
     price: "",
@@ -10,7 +10,7 @@ const FormularioProducto = ({ onAgregar }) => {
     category: "oferta",
     detail: "Sin detalles adicionales",
   });
-  const [errores, setErrores] = useState({});
+  const [errores] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,17 +19,7 @@ const FormularioProducto = ({ onAgregar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAgregar(producto); //usa la función que viene del admin para agregar
-    setProducto({
-      //retorna a campos vacíos
-      name: "",
-      price: "",
-      description: "",
-      stock: "",
-      img: "/images/blank.jpg",
-      category: "oferta",
-      detail: "Sin detalles adicionales",
-    });
+    onSubmit(producto);
   };
 
   return (
@@ -87,6 +77,17 @@ const FormularioProducto = ({ onAgregar }) => {
           <option value="premium">Premium</option>
         </select>
         {errores.category && <p style={{ color: "red" }}>{errores.category}</p>}
+      </div>
+      <div>
+        <label>URL de Imagen:</label>
+        <input
+          type="text"
+          name="img"
+          value={producto.img}
+          onChange={handleChange}
+          required
+        />
+        {errores.img && <p style={{ color: "red" }}>{errores.img}</p>}
       </div>
       <div>
         <label>Descripción:</label>
