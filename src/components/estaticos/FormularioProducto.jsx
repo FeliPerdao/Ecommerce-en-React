@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
-const FormularioProducto = ({ onSubmit }) => {
-  const [producto, setProducto] = useState({
-    name: "",
-    price: "",
-    description: "",
-    stock: "",
-    img: "/images/blank.jpg",
-    category: "oferta",
-    detail: "Sin detalles adicionales",
-  });
+const FormularioProducto = ({ onSubmit, initialData }) => {
+  const [producto, setProducto] = useState(
+    initialData || {
+      name: "",
+      price: "",
+      description: "",
+      stock: "",
+      img: "/images/blank.jpg",
+      category: "oferta",
+      detail: "Sin detalles adicionales",
+    }
+  );
   const [errores] = useState({});
 
   const handleChange = (e) => {
@@ -102,7 +104,9 @@ const FormularioProducto = ({ onSubmit }) => {
           <p style={{ color: "red" }}>{errores.description}</p>
         )}
       </div>
-      <button type="submit">Agregar Producto</button>
+      <button type="submit">
+        {producto.id ? "Editar Producto" : "Agregar Producto"}
+      </button>
     </form>
   );
 };

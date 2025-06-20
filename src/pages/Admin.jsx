@@ -16,8 +16,9 @@ const Admin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(producto),
+        body: JSON.stringify(producto), //Manda el producto en texto plano
       });
+
       if (!respuesta.ok) {
         throw new Error("Error al agregar producto");
       }
@@ -35,9 +36,11 @@ const Admin = () => {
       const res = await fetch(`${urlApi}/${producto.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(producto),
+        body: JSON.stringify(producto), //Manda el producto en texto plano
       });
-      if (!res.ok) throw new Error("Error al editar");
+
+      if (!res.ok) throw new Error("Error al editar el producto.");
+      
       await res.json();
       alert("Producto editado correctamente");
       fetchProductos();
