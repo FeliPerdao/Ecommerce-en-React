@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FormularioProducto = ({ onSubmit, initialData }) => {
+const FormularioProducto = ({ onSubmit, initialData, setOpen }) => {
   const [producto, setProducto] = useState(
     initialData || {
       name: "",
@@ -26,9 +26,23 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Agregar Producto</h2>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        <h2>
+          {producto.id ? `Editar Producto ${producto.id}` : "Agregar Producto"}
+        </h2>
+        <button type="button" onClick={() => setOpen(false)}>
+          X
+        </button>
+      </div>
       <div>
-        <label>Nombre:</label>
+        <label>Nombre: </label>
         <input
           type="text"
           name="name"
@@ -39,7 +53,7 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
         {errores.name && <p style={{ color: "red" }}>{errores.name}</p>}
       </div>
       <div>
-        <label>Precio:</label>
+        <label>Precio: </label>
         <input
           type="number"
           name="price"
@@ -51,7 +65,7 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
         {errores.price && <p style={{ color: "red" }}>{errores.price}</p>}
       </div>
       <div>
-        <label>Stock:</label>
+        <label>Stock: </label>
         <input
           type="number"
           name="stock"
@@ -63,7 +77,7 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
         {errores.stock && <p style={{ color: "red" }}>{errores.stock}</p>}
       </div>
       <div>
-        <label>Categoría:</label>
+        <label>Categoría: </label>
         <select
           name="category"
           value={producto.category}
@@ -81,7 +95,7 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
         {errores.category && <p style={{ color: "red" }}>{errores.category}</p>}
       </div>
       <div>
-        <label>URL de Imagen:</label>
+        <label>URL de Imagen: </label>
         <input
           type="text"
           name="img"
@@ -92,7 +106,7 @@ const FormularioProducto = ({ onSubmit, initialData }) => {
         {errores.img && <p style={{ color: "red" }}>{errores.img}</p>}
       </div>
       <div>
-        <label>Descripción:</label>
+        <label>Descripción: </label>
         <input
           type="text"
           name="description"

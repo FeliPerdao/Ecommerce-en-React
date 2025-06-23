@@ -1,72 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../context/ProductsContext";
 import FormularioProducto from "../components/estaticos/FormularioProducto";
 import loading from "../assets/loading.gif";
+import { AdminContext } from "../context/AdminContext";
 
 const Admin = () => {
   const { productos, urlApi, cargando, fetchProductos } = useProducts(); //El fetchProducts viene como Context para actualizar despues de apretar boton
-  const [open, setOpen] = useState(false);
-  const [productoEditando, setProductoEditando] = useState(null);
-
-  const agregarProducto = async (producto) => {
-    try {
-      const respuesta = await fetch(urlApi, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(producto), //Manda el producto en texto plano
-      });
-
-      if (!respuesta.ok) {
-        throw new Error("Error al agregar producto");
-      }
-      await respuesta.json();
-      alert("Producto agregado correctamente");
-      fetchProductos();
-    } catch (error) {
-      console.log(error.message);
-    }
-    setOpen(false);
-  };
-
-  const editarProducto = async (producto) => {
-    try {
-      const res = await fetch(`${urlApi}/${producto.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(producto), //Manda el producto en texto plano
-      });
-
-      if (!res.ok) throw new Error("Error al editar el producto.");
-      
-      await res.json();
-      alert("Producto editado correctamente");
-      fetchProductos();
-    } catch (err) {
-      console.error(err);
-    }
-    setProductoEditando(null);
-    setOpen(false);
-  };
-
-  const eliminarProducto = async (id) => {
-    const confirmar = window.confirm("Estás seguro de eliminar el producto?");
-    if (confirmar) {
-      try {
-        const respuesta = await fetch(`${urlApi}/${id}`, {
-          method: "DELETE",
-        });
-        if (!respuesta.ok) throw Error("Error al eliminar");
-
-        alert("Producto eliminado correctamente");
-        fetchProductos();
-      } catch (error) {
-        alert("Hubo un problema al eliminar el producto", error);
-      }
-    }
-  };
+  const {
+    open,
+    setOpen,
+    productoEditando,
+    setProductoEditando,
+    agregarProducto,
+    editarProducto,
+    eliminarProducto,
+  } = useContext(AdminContext);
 
   return (
     <div className="container">
@@ -122,11 +71,19 @@ const Admin = () => {
               </li>
             ))}
           </ul>
-          <button onClick={() => setOpen(true)}>Agregar nuevo producto</button>
+          <button
+            onClick={() => {
+              setOpen(true);
+              setProductoEditando(null);
+            }}
+          >
+            Agregar nuevo producto
+          </button>
           {open && (
             <FormularioProducto
               onSubmit={productoEditando ? editarProducto : agregarProducto}
               initialData={productoEditando}
+              setOpen={setOpen}
             />
           )}
         </>

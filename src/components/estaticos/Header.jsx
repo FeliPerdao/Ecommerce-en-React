@@ -6,6 +6,7 @@ import ThemeSetter from "./ThemeSetter";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { ThemeContext } from "../../context/ThemeContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -103,7 +104,8 @@ const Header = () => {
           </li>
           <li className="cartnav">
             <button className="btnCart" onClick={() => setIsCartOpen(true)}>
-              <i className="fa-solid fa-cart-shopping"></i>
+              {/* <i className="fa-solid fa-cart-shopping"></i> */}
+              <FaShoppingCart color='red'/>
             </button>
             <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
           </li>
@@ -114,3 +116,4 @@ const Header = () => {
 };
 
 export default Header;
+

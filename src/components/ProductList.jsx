@@ -4,15 +4,23 @@ import "./styleProductos.css";
 import { useProducts } from "../context/ProductsContext";
 
 const ProductList = () => {
-  const { filteredProducts } = useProducts();
+  const { busqueda, setBusqueda, productosRenderizados } = useProducts();
 
-  if (!Array.isArray(filteredProducts) || filteredProducts.length === 0)
+  if (
+    !Array.isArray(productosRenderizados) ||
+    productosRenderizados.length === 0
+  )
     return <p>No hay productos disponibles en la categoría seleccionada.</p>;
 
   return (
     <>
       <h2>Galería de Productos</h2>
-
+      <input
+        type="text"
+        placeholder="Buscar productos..."
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+      />
       <div
         style={{
           display: "flex",
@@ -20,7 +28,7 @@ const ProductList = () => {
           justifyContent: "space-evenly",
         }}
       >
-        {filteredProducts.map((producto) => (
+        {productosRenderizados.map((producto) => (
           <Productos key={producto.id} producto={producto} />
         ))}
       </div>

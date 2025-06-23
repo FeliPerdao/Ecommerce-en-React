@@ -7,19 +7,25 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
+import { AdminProvider } from "./context/AdminContext.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Router>
-      <AuthProvider>
-        <ThemeProvider>
-          <ProductsProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </ProductsProvider>
-        </ThemeProvider>
-      </AuthProvider>
+      <ProductsProvider>
+        <AdminProvider>
+          <AuthProvider>
+            <ThemeProvider>
+              <CartProvider>
+                <App />
+                <ToastContainer />
+              </CartProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </AdminProvider>
+      </ProductsProvider>
     </Router>
   </StrictMode>
 );

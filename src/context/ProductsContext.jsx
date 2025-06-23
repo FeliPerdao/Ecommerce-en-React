@@ -16,6 +16,7 @@ export const ProductsProvider = ({ children }) => {
   const [isGaleria, setIsGaleria] = useState(false);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
 
   const fetchProductos = async () => {
     //funcion exportada para hacer actualizar despues de apretar un moton que modifica objetos.
@@ -50,11 +51,17 @@ export const ProductsProvider = ({ children }) => {
     );
   };
 
-  const filteredProducts = isGaleria
-    ? productos.filter((producto) =>
-        selectedCategories.includes(producto.category)
-      )
-    : productos;
+  const productosRenderizados = productos.filter((producto) => {
+    const coincideCategoria = isGaleria
+      ? selectedCategories.includes(producto.category)
+      : true;
+
+    const coincideBusqueda = producto?.name
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
+
+    return coincideCategoria && coincideBusqueda;
+  });
 
   return (
     <ProductsContext.Provider
@@ -66,10 +73,12 @@ export const ProductsProvider = ({ children }) => {
         cargando,
         error,
         handleCheckboxChange,
-        filteredProducts,
         setIsGaleria,
         urlApi,
         fetchProductos,
+        busqueda,
+        setBusqueda,
+        productosRenderizados,
       }}
     >
       {children}
