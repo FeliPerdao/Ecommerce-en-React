@@ -139,3 +139,28 @@
   background-color: #333333;
   color: white;
 }
+
+.paginador-custom {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.paginador-custom button {
+  padding: 8px 12px;
+  background-color: #ddd;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.paginador-custom button:hover {
+  background-color: #bbb;
+}
+
+.paginador-custom .activo {
+  background-color: #007bff;
+  color: white;
+}
