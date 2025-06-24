@@ -184,10 +184,26 @@
   cursor: pointer;
   font-size: 16px;
   margin-left: 10px;
+  margin-bottom: 12px;
 }
 
 .delete-btn:hover {
   background-color: #d93636;
+
+}.buy-btn {
+  background-color:rgb(77, 255, 80);
+  color: black;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-bottom: 12px;
+}
+
+.buy-btn:hover {
+  background-color: rgb(39, 138, 41);
 }
 
 .cart-list {
@@ -217,4 +233,5 @@
   z-index: 10;
   max-width: 100%;
   margin-right: 12px;
+  margin-bottom: 12px;
 }

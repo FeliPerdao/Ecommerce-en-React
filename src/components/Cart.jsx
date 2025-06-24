@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./styleCart.css";
 import { useProducts } from "../context/ProductsContext";
 import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 const Cart = ({ isOpen, onClose }) => {
   const {
@@ -9,18 +10,17 @@ const Cart = ({ isOpen, onClose }) => {
     handleRemoveFromCart,
     handleRemoveItem,
     handleClearCart,
-    handleLimiteStock
+    handleLimiteStock,
   } = useCart();
 
   const { productos } = useProducts();
-  
+
   const cartItems = cart;
-  
+
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  
 
   useEffect(() => {
     const exceededStock = cartItems.some((item) => {
@@ -84,7 +84,24 @@ const Cart = ({ isOpen, onClose }) => {
             </ul>
             <div className="cart-total">Total de la compra: ${total}</div>
             <div>
-              <button className="delete-btn" onClick={() => handleClearCart()}>
+              <button
+                className="buy-btn"
+                onClick={() => {
+                  handleClearCart();
+                  toast.info("Compra finalizada!");
+                }}
+              >
+                Finalizar Compra
+              </button>
+            </div>
+            <div>
+              <button
+                className="delete-btn"
+                onClick={() => {
+                  handleClearCart();
+                  toast.info("Carrito vaciado!");
+                }}
+              >
                 Esvaciar Carrito
               </button>
             </div>
